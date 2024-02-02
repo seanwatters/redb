@@ -287,13 +287,13 @@ fn main() {
         benchmark(table)
     };
 
-    let lmdb_results = {
-        let tmpfile: TempDir = tempfile::tempdir_in(&tmpdir).unwrap();
-        let env = lmdb::Environment::new().open(tmpfile.path()).unwrap();
-        env.set_map_size(4096 * 1024 * 1024).unwrap();
-        let table = LmdbRkvBenchDatabase::new(&env);
-        benchmark(table)
-    };
+    // let lmdb_results = {
+    //     let tmpfile: TempDir = tempfile::tempdir_in(&tmpdir).unwrap();
+    //     let env = lmdb::Environment::new().open(tmpfile.path()).unwrap();
+    //     env.set_map_size(4096 * 1024 * 1024).unwrap();
+    //     let table = LmdbRkvBenchDatabase::new(&env);
+    //     benchmark(table)
+    // };
 
     let rocksdb_results = {
         let tmpfile: TempDir = tempfile::tempdir_in(&tmpdir).unwrap();
@@ -327,7 +327,7 @@ fn main() {
 
     for results in [
         redb_latency_results,
-        lmdb_results,
+        // lmdb_results,
         rocksdb_results,
         sled_results,
         sanakirja_results,
@@ -339,7 +339,7 @@ fn main() {
 
     let mut table = comfy_table::Table::new();
     table.set_width(100);
-    table.set_header(["", "redb", "lmdb", "rocksdb", "sled", "sanakirja"]);
+    table.set_header(["", "redb", /* "lmdb", */ "rocksdb", "sled", "sanakirja"]);
     for row in rows {
         table.add_row(row);
     }

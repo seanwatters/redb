@@ -23,6 +23,7 @@ pyo3 = {version = "0.20.0", features=["extension-module", "abi3-py37"], optional
 
 [target.'cfg(unix)'.dependencies]
 libc = "0.2.104"
+rustix = { version = "0.38.31", features = ["fs"] }
 
 # Common test/bench dependencies
 [dev-dependencies]
