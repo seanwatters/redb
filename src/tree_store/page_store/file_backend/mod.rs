@@ -1,7 +1,12 @@
-#[cfg(any(unix, target_os = "wasi"))]
+#[cfg(target_os = "wasi")]
 mod unix;
-#[cfg(any(unix, target_os = "wasi"))]
+#[cfg(target_os = "wasi")]
 pub use unix::FileBackend;
+
+#[cfg(unix)]
+mod rustix_be;
+#[cfg(unix)]
+pub use rustix_be::FileBackend;
 
 #[cfg(windows)]
 mod windows;
